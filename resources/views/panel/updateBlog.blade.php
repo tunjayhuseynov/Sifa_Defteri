@@ -13,7 +13,8 @@
     <div class="container-fluid">
         <div class="row">
             @csrf
-        <input type="hidden" value="{{$data[0]->image}}" name="oldImage " >
+        <input type="hidden" value="{{$data[0]->image}}" name="oldImage" >
+        <input type="hidden" value="{{$data[0]->createdDate}}" name="createdDate" >
             <div class="col-6">
                 <label for="name">Title: </label>
                 <input class="form-control" type="text" name="title" placeholder="Title" value="{{$data[0]->title}}"

@@ -23,12 +23,19 @@
                     {{$data->name}}
                 </h4>
             </div>
+            <div class="box text-center">
+                <label>Created Date: </label>
+                <h4>
+                    {{$data->createdDate}}
+                </h4>
+            </div>
 
         </div>
         <div class="col-6">
             <div class="box text-center" style="padding: 15px 15px;">
                 <label>Text: </label>
-                <h5 style="text-align: justify">{{$data->text}}</h5>
+                <br>
+                <h6 style="text-align: left; white-space: pre-line;">{{$data->text}}</h6>
             </div>
         </div>
     </div>

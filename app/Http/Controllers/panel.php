@@ -22,14 +22,14 @@ class panel extends Controller
 
     public function listBlog(Request $request)
     {
-        $blogs = DB::table('categories')->join("blogs", "blogs.categoryId", "=", "categories.id")->get();
+        $blogs = DB::table('categories')->join("blogs", "blogs.categoryId", "=", "categories.cId")->get();
        
         return view("panel/blogList")->with("data", $blogs);
     }
 
     public function viewBlog(Request $request)
     {
-        $blogs = DB::table('categories')->where("blogs.id", $request->route("id"))->join("blogs", "blogs.categoryId", "=", "categories.id")->first();
+        $blogs = DB::table('categories')->where("blogs.id", $request->route("id"))->join("blogs", "blogs.categoryId", "=", "categories.cId")->first();
          
         return view("panel/blog")->with("data", $blogs);
     }
@@ -47,6 +47,7 @@ class panel extends Controller
         $text = $request->input("text");
         $category = $request->input("category");
 
+
         if($request->hasFile("image") && $request->file("image")->isValid()){
             $image = $request->file("image");
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -57,7 +58,8 @@ class panel extends Controller
             "title" => $title,
             "image" => "/images/blogs/" . $imageName,
             "text" => $text,    
-            "categoryId" => $category
+            "categoryId" => $category,
+            "createdDate" => date("d-m-Y")
         ]);
 
 
@@ -89,6 +91,7 @@ class panel extends Controller
         $text = $request->input("text");
         $category = $request->input("category");
         $oldImageName = $request->input("oldImage");
+        $createdDate = $request->input("createdDate");
 
         if($request->hasFile("image") && $request->file("image")->isValid()){
             $image = $request->file("image");
@@ -100,7 +103,8 @@ class panel extends Controller
             "title" => $title,
             "image" =>  isset($image) == 1 ?"/images/blogs/".$imageName:$oldImageName,
             "text" => $text,
-            "categoryId" => $category
+            "categoryId" => $category,
+            "createdDate" => $createdDate
         ]);
 
 
